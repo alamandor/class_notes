@@ -1,0 +1,38 @@
+LOCKS
+
+There are 2 types of lock:
+ - Spin Lock
+ - Wait lock (Blocking lock)
+  - Actually a binary semaphore
+
+- Locks can be advisory or mandatory
+ - Ours is advisory - all threads agree to voluntarily acquire the lock
+ - Locked -- A thread has ownerhsip and other threads must wait to access
+ - Unlocked -- Object is ready to be accessed
+
+- if we try to grab a lock...
+ - and it is locked: Then we return failure - lock remains locked
+ - When we lock it, we return the PID of the process that got it.
+ - 0 return code usually means it was unlocked
+
+DEFINE ATOMIC EXCHANGE -- Midterm Question
+- WHat it tells you is the prior state of the lock
+
+We can also use XCHG() to do this, this swaps a location in memory with
+another, and RETURNs what was there. so we could swap something with a locked
+lock and then it would return the state of the memory we swapped, which is the
+prior state of the lock.
+
+- Spin Lock
+  - uses somehing like a while loop to constantly check the status of the desired lock the process wants of obtain.
+
+If the latency of an opertion that needs the lock is very high, it is more efficient to just put the lock on sleep.
+ - However: if the latency is low we should use a spin-lock and just take the processing hit to have the spin-lock "spinning".
+
+Pthread Mutexes:
+ -
+
+Unanswered QUestions:
+ - Learn what an atomic instruction is
+ 	- It is only ONE instruction
+ - Look at review questions at end of class note handouts, some of these are going to be in the midterm.

@@ -1,0 +1,22 @@
+- if a Function is only being called and used locally, then use the static keyword on it.
+ - This helps the linker by explicity stating its only local
+ - It also strips it from the symbol table in the debugger (security precaution)
+
+- The LINKER is responsible for assigning the virtual addresses for all the bits of code (functions, macros, etc)
+ - The "Linking" is done by assigning all these outside functions virtual functions and then putting those addresses in the correct order.
+ - The addresses are NOT assingned by the OS, but by the linker.
+
+
+PROCESSES
+  - The fork() call can be thouth of as cloning the process that calls it.
+  - The lines of code after the call to fork() will be executed BY BOTH the original parent and the cloned child. So there is typically a check after to see which one we are dealing with
+  - Every process can retrieve their own PID.
+  - If you need to know the PID of a processes children you do it with the fork call.
+  - To create a new process you use fork, then exec can load into it, but it doesnt need to.
+  - The parent also typically needs to do something by waiting for their child to end.
+CONTEXT SWITCH
+  - The OS saves the registers of the current process, then loads the context of the SCHEDULER, which is in charge of selecting the next process to preform a context switch to.
+  	- A "Context" is just the regsters for the process that are saved.
+  - Then it saves the schedulers context and loads the context of the new process it is switching control over to.
+  - So, for every context switch there are actually 2 that occur, an extra one for the schedulers context switch.
+
