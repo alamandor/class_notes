@@ -1,0 +1,33 @@
+** copy the state diagram in the lecture notes **
+
+- A process must be on one and only one state list.
+- Only one process at a time can be using the pTable
+
+-- These functions will be modified with if/else conditional compilation flags:
+  - Exit()
+  - Wait()
+  - Scheduler()
+  - Yield()
+  - Sleep()
+  - wakeup1()
+  - kill()
+
+Transaction -- 6 Steps:
+1) Get lock. Check Broke
+2) Remove from list
+3) Assert state
+4) Update proc
+5) Put on a new list. Check reest
+6) Release Lock
+
+Project 3 Overview:
+
+- If we abort the transaction mid-way, we have to put the process back to unused.
+- Only Ctrl-P will NOT use the pTable lock
+- Init the state lists in userinit() --> in proc.c
+  - InitProcessLists()
+  - initFreeList()
+- userInit() then calls allocproc()
+  - This is where the process is removed from the free list and allocated.
+  - allocproc() places process in the EMBRYO state.
+  - By the end of Userinit() you will have a RUNNABLE process. This needs to be added to the ready list.
